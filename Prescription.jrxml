@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Prescription" pageWidth="450" pageHeight="300" columnWidth="410" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b42161f-35f3-404c-9c4b-b65d3f417341">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="Prescription_no" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$F{PRESCRIPTION_NO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="expert_first_name" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$F{EXPERT_FIRST_NAME}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Disease_name" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$F{DISEASE_NAME}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fair" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Symptom_name" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$F{SYMPTOM_NAME}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT Prescription_no,expert_first_name, Disease_name, Symptom_name,fair
+FROM Prescription t, Disease p, Symptom d,Fisheries_Expert b
+Where t.expert_id=b.expert_id AND p.Disease_id=t.Disease_id
+AND d.Symptom_id=t.Symptom_id and t.Prescription_no=$P{Prescription_no}]]>
+	</queryString>
+	<field name="PRESCRIPTION_NO" class="java.lang.String"/>
+	<field name="EXPERT_FIRST_NAME" class="java.lang.String"/>
+	<field name="DISEASE_NAME" class="java.lang.String"/>
+	<field name="SYMPTOM_NAME" class="java.lang.String"/>
+	<field name="FAIR" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="263" y="0" width="146" height="68" uuid="8d34861a-cd3d-41ff-978d-91e9fd11561e"/>
+				<imageExpression><![CDATA["Golda_ireport.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="247" height="33" uuid="b11e21c2-44d1-451b-b525-fc35f72409ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[FISHERIES DIAGNOSTIC REPORT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="130" height="22" uuid="60e2c82b-bcc4-4265-9b2f-0cdf663eb5c4"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESCRIPTION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="bb17c6ad-cd49-4b22-9d7b-cc90223e2f12"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="6" y="4" width="138" height="15" uuid="2be397d9-c7a7-4a12-baf7-62a3ad0a5595"/>
+				<text><![CDATA[PRESCRIPTION NO]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" mode="Transparent" x="152" y="4" width="111" height="15" backcolor="#66FFFF" uuid="fdd39141-4fc9-417f-88fd-6d44caf91dc2"/>
+				<textFieldExpression><![CDATA[$F{PRESCRIPTION_NO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="119" splitType="Immediate">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-19" y="-3" width="429" height="4" uuid="c64c8046-4266-4c1d-b773-cb1830ea6eda"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="152" y="0" width="111" height="20" uuid="d657b181-317d-471e-958e-98cad701cf7c"/>
+				<textFieldExpression><![CDATA[$F{EXPERT_FIRST_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="152" y="26" width="111" height="20" uuid="4f5064de-53d3-4f29-aee1-84958f1e6054"/>
+				<textFieldExpression><![CDATA[$F{SYMPTOM_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="152" y="56" width="111" height="22" uuid="c5f0662c-1f48-40d1-9792-5d2ab9469f6a"/>
+				<textFieldExpression><![CDATA[$F{DISEASE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="152" y="88" width="111" height="20" uuid="75d1740b-141e-451e-bec9-46e4204085e7"/>
+				<textFieldExpression><![CDATA[$F{FAIR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="6" y="1" width="132" height="20" uuid="eb33f1e6-da8d-46cd-8703-5b77768b0dcb"/>
+				<text><![CDATA[EXPERT'S NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="6" y="26" width="132" height="20" uuid="bd54ef79-e394-4d23-9fde-c11d96a079d2"/>
+				<text><![CDATA[SYMPTOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="6" y="56" width="132" height="20" uuid="a518e7d3-32ca-4970-a4e9-50330016db5f"/>
+				<text><![CDATA[DISEASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="6" y="88" width="132" height="20" uuid="daff6bf2-2fb8-4715-a973-275c31aaafa0"/>
+				<text><![CDATA[REMEDY]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="ca9bb281-069d-4375-92a4-ab4863573fa6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="197" y="0" width="80" height="20" uuid="98c4abc2-7c69-4786-bb16-2a4edc35cd74"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="277" y="0" width="40" height="20" uuid="bcc0c451-2ede-43a2-9df7-91513fe98794"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="3f4e30fd-915c-42b5-91b1-d4186380f0d1"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,53 @@
+
+CREATE TABLE Fisheries_Expert
+(
+	expert_id varchar (10),
+	expert_first_name varchar (30),
+	expert_sur_name varchar (20),
+	expert_address varchar (120),
+	expert_home_phone varchar (15),
+	expert_mobile varchar (15),
+	Primary Key (expert_id)
+);
+
+CREATE TABLE Symptom
+(
+	Symptom_id varchar (10),
+	Symptom_name varchar (40),
+	Symptom_description varchar (150),
+	Primary Key (Symptom_id)
+);
+
+CREATE TABLE Disease
+(
+	Disease_id varchar (10),
+	Disease_name varchar (40),
+	Symptom_id varchar (10),
+	Disease_description varchar (150),
+	Primary Key (Disease_id),
+	Foreign Key (Symptom_id) References Symptom
+);
+
+CREATE TABLE Remedy
+(
+	Remedy_id varchar (10),
+	Disease_id varchar (10),
+	Symptom_id varchar (10),
+	Remedy varchar (30),
+	Primary Key (Remedy_id),
+	Foreign Key (Disease_id) References Disease,
+	Foreign Key (Symptom_id) References Symptom
+);
+
+CREATE TABLE Prescription
+(
+	Prescription_no varchar (10),
+	expert_id varchar (10),
+	Symptom_id varchar (10),
+	Disease_id varchar (10),
+	fair varchar(30),
+	Prescription_date date,
+	Primary Key (Prescription_no),
+	Foreign Key (Symptom_id) References Symptom,
+	Foreign Key (Disease_id) References Disease
+);
